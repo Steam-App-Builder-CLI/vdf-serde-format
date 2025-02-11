@@ -46,10 +46,12 @@ macro_rules! adjust_indentation {
         {
             unsafe {
                 let delta: i32 = $delta;
-                if delta < 0 {
-                    INDENTATION -= delta.abs() as usize;
-                } else {
-                    INDENTATION += delta as usize;
+                if INDENTATION != 0 && delta < 0 {
+                    if delta < 0 {
+                        INDENTATION -= delta.abs() as usize;
+                    } else {
+                        INDENTATION += delta as usize;
+                    }
                 }
             }
         }
