@@ -1,0 +1,20 @@
+[package]
+name = "vdf_serde"
+version = "0.0.0"
+edition = "2021"
+license-file = "LICENSE"
+description = "A VDF serialization/deserialization file format using serde."
+repository = "https://github.com/bsmithcompsci/vdf_serde"
+readme = "README.md"
+authors = ["Brandon Smith <bsmithcompsci@gmail.com>"]
+keywords = ["vdf", "serde", "serialization", "deserialization", "file format", "valve data format"]
+categories = ["data formats", "serialization", "deserialization", "file formats"]
+documentation = "https://docs.rs/vdf_serde"
+homepage = "https://docs.rs/vdf_serde"
+publish = true
+rust-version = "1.81.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0.197", features = ["derive"] }
