@@ -17,6 +17,8 @@ jobs:
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
+    - name: Install tarpaulin
+      run: cargo install cargo-tarpaulin
 
     - name: Build in release mode
       env:
