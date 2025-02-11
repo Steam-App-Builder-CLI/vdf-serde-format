@@ -1,0 +1,30 @@
+name: Semantic Versioning
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+
+jobs:
+  semver:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install semantic-release
+      run: npm install -g semantic-release
+
+    - name: Run semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: semantic-release

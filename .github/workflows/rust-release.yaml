@@ -1,0 +1,61 @@
+name: Rust Release
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+
+    - name: Build in release mode
+      env:
+        RUSTFLAGS: "--deny warnings"
+      run: cargo build --release --locked
+
+    - name: Run tests
+      env:
+        RUSTFLAGS: "--deny warnings"
+      run: cargo test --release --locked
+
+    - name: Run Code Coverage
+      env:
+        RUSTFLAGS: "--deny warnings"
+      run: cargo tarpaulin --out Xml --locked
+
+    - name: Upload Code Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage
+  publish:
+    if: contains(github.ref, 'main') # Only publish when on main branch.
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+
+    - name: Publish to crates.io
+      env:
+        CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+      run: cargo publish --token $CRATES_IO_TOKEN
+
+    - name: Create a GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: cargo release --token $GITHUB_TOKEN
