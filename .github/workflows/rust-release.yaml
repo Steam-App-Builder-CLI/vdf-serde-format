@@ -21,17 +21,17 @@ jobs:
     - name: Build in release mode
       env:
         RUSTFLAGS: "--deny warnings"
-      run: cargo build --release --locked
+      run: cargo build --release
 
     - name: Run tests
       env:
         RUSTFLAGS: "--deny warnings"
-      run: cargo test --release --locked
+      run: cargo test --release
 
     - name: Run Code Coverage
       env:
         RUSTFLAGS: "--deny warnings"
-      run: cargo tarpaulin --out Xml --locked
+      run: cargo tarpaulin --out Xml
 
     - name: Upload Code Coverage
       uses: actions/upload-artifact@v4
