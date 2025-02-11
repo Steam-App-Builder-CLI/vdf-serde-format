@@ -57,12 +57,15 @@ jobs:
     - name: Run Code Coverage
       env:
         RUSTFLAGS: "--deny warnings"
-      run: cargo tarpaulin --out Xml
+      run: cargo tarpaulin --out lcov --fail-immediately --release --fail-under 65
 
     - name: Upload Code Coverage
       uses: actions/upload-artifact@v4
       with:
         name: coverage
+        path: lcov.info
+        overwrite: true
+        if-no-files-found: error
   publish:
     if: contains(github.ref, 'main') # Only publish when on main branch.
     needs: build
