@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.3...v1.0.4) (2025-02-12)
+
+
+### Bug Fixes
+
+* **ci:** cargo set-version wrong var. ([78024f4](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/78024f46acd2ed5d38cfbb8cdb4641204ca67b3c))
+
 ## [1.0.3](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.2...v1.0.3) (2025-02-12)
 
 
