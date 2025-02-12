@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.7...v1.0.8) (2025-02-12)
+
+
+### Bug Fixes
+
+* **cargo:** updated package name. ([26e3f32](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/26e3f327a6e0912e4b5f15b00cbfa0c211faa47b))
+
 ## [1.0.7](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.6...v1.0.7) (2025-02-12)
 
 
