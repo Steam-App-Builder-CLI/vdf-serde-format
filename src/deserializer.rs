@@ -901,14 +901,11 @@ impl<'de, 'a> EnumAccess<'de> for Enum<'a, 'de> {
         // The `deserialize_enum` method parsed a `{` character so we are
         // currently inside of a map. The seed will be deserializing itself from
         // the key of the map.
-        let val = seed.deserialize(&mut *self.de)?;
-        // Parse the colon separating map key from value.
-        Ok((val, self))
-        // if self.de.next_expect_char(':')? {
-        //     Ok((val, self))
-        // } else {
-        //     Err(Error::ExpectedMapColon)
-        // }
+        let val = seed.deserialize(&mut *self.de);
+        match val {
+            Ok(val) => Ok((val, self)),
+            Err(_) => Err(Error::ExpectedEnum),
+        }
     }
 }
 
