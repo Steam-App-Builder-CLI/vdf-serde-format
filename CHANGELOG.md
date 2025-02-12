@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.1...v1.0.2) (2025-02-12)
+
+
+### Bug Fixes
+
+* **ci:** fetching tags. ([d9cca42](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/d9cca429a6a7e5682ca1f29353256848e66a2fe1))
+
 ## [1.0.1](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.0...v1.0.1) (2025-02-12)
 
 
