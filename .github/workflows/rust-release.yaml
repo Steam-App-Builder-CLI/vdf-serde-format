@@ -61,7 +61,7 @@ jobs:
         echo "Version '$TAG_NAME'"
         if [ -n "$TAG_NAME" ]; then
           echo "Found tag: '$TAG_NAME' - setting version..."
-          cargo set-version ${GITHUB_REF_NAME}
+          cargo set-version ${TAG_NAME}
         else
           echo "No tags found, no version was set."
         fi
@@ -107,7 +107,7 @@ jobs:
         echo "Version '$TAG_NAME'"
         if [ -n "$TAG_NAME" ]; then
           echo "Found tag: `$TAG_NAME` - setting version..."
-          cargo set-version ${GITHUB_REF_NAME}
+          cargo set-version ${TAG_NAME}
         else
           echo "No tags found, no version was set."
         fi
