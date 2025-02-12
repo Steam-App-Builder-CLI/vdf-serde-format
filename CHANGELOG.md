@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.5...v1.0.6) (2025-02-12)
+
+
+### Bug Fixes
+
+* **cargo:** keywords going over the limit. ([199fa8d](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/199fa8dd2af6a2dd5a3659a552af41cb3bf3287a))
+
 ## [1.0.5](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.4...v1.0.5) (2025-02-12)
 
 
