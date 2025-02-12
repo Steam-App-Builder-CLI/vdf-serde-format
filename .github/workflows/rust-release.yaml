@@ -57,8 +57,8 @@ jobs:
       run: |
         git status
         git fetch --tags
-        echo "Version '$(git tag --sort=-creatordate | head -n 1)'"
-        TAG_NAME=$(git tag --sort=-creatordate | head -n 1)
+        TAG_NAME=$(git tag --sort=-creatordate | head -n 1 | sed 's/[^0-9.]//g')
+        echo "Version '$TAG_NAME'"
         if [ -n "$TAG_NAME" ]; then
           echo "Found tag: '$TAG_NAME' - setting version..."
           cargo set-version ${GITHUB_REF_NAME}
@@ -103,8 +103,8 @@ jobs:
       run: |
         git status
         git fetch --tags
-        echo "Version '$(git tag --sort=-creatordate | head -n 1)'"
-        TAG_NAME=$(git tag --sort=-creatordate | head -n 1)
+        TAG_NAME=$(git tag --sort=-creatordate | head -n 1 | sed 's/[^0-9.]//g')
+        echo "Version '$TAG_NAME'"
         if [ -n "$TAG_NAME" ]; then
           echo "Found tag: `$TAG_NAME` - setting version..."
           cargo set-version ${GITHUB_REF_NAME}
