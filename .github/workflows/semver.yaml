@@ -1,5 +1,7 @@
 name: Semantic Versioning
 
+permissions: write-all
+
 on:
   workflow_dispatch:
   push:
