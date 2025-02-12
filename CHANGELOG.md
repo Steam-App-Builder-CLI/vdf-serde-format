@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/Steam-App-Builder-CLI/vdf-serde-format/compare/v1.0.8...v1.0.9) (2025-02-12)
+
+
+### Bug Fixes
+
+* **chore:** metadata. ([9cc1fb3](https://github.com/Steam-App-Builder-CLI/vdf-serde-format/commit/9cc1fb3a1e359ae96d145c6bcf24a7197a75a0d4))
+
 ## [1.0.8](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.7...v1.0.8) (2025-02-12)
 
 
