@@ -1,13 +1,15 @@
 name: Rust Release
 
+permissions: write-all
+
 on:
   push:
-    branches:
+    branches-ignore:
       - main
     tags:
       - '*'
   pull_request:
-    types: [opened, synchronize, reopened, closed, ready_for_review, review_requested]
+    types: [opened, synchronize, reopened, ready_for_review, review_requested]
     branches:
       - main
 
