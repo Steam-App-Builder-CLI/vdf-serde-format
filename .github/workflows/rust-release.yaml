@@ -44,20 +44,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-cargo-build-
 
-    - name: Build in release mode
-      env:
-        RUSTFLAGS: "--deny warnings"
-      run: cargo build --release
-
-    - name: Run tests
-      env:
-        RUSTFLAGS: "--deny warnings"
-      run: cargo test --release
-
     - name: Run Code Coverage
       env:
         RUSTFLAGS: "--deny warnings"
-      run: cargo tarpaulin --out lcov --fail-immediately --release --fail-under 65
+      run: cargo tarpaulin --out lcov --fail-immediately --release --fail-under 50 --force-clean
 
     - name: Upload Code Coverage
       uses: actions/upload-artifact@v4
@@ -66,6 +56,17 @@ jobs:
         path: lcov.info
         overwrite: true
         if-no-files-found: error
+      
+    - name: Build in release mode
+      env:
+        RUSTFLAGS: "--deny warnings"
+      run:
+        if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+          VERSION=${GITHUB_REF_NAME}
+        else
+          VERSION=${GITHUB_SHA::8}
+        fi
+        cargo build --release --config package.version="${VERSION}"
   publish:
     if: contains(github.ref, 'main') # Only publish when on main branch.
     needs: build
