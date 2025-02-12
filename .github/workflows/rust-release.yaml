@@ -44,9 +44,7 @@ jobs:
       with:
         toolchain: stable
     - name: Cargo Install Packages
-      run: 
-        cargo install cargo-edit
-        cargo install cargo-tarpaulin
+      run: cargo install cargo-edit cargo-tarpaulin
     
     - name: Set Cargo Version
       if: contains(github.ref_type, 'tag')
