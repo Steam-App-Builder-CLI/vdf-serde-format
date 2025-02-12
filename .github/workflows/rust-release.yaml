@@ -3,7 +3,13 @@ name: Rust Release
 on:
   push:
     branches:
-      - '**'
+      - main
+    tags:
+      - '*'
+  pull_request:
+    types: [opened, synchronize, reopened, closed, ready_for_review, review_requested]
+    branches-ignore:
+      - main
 
 jobs:
   build:
