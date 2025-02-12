@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.0...v1.0.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* **ci:** workflow run in the order of Semver or pull request. ([451f179](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/451f179e40e72cef446dc782fbdc404d672f4b1e))
+
 # [1.0.0](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/...v1.0.0) (2025-02-12)
 
 
