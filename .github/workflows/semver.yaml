@@ -24,7 +24,7 @@ jobs:
     - name: Install semantic-release
       run: |
         npm init -y
-        npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator @sematinc-release/npm
+        npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/npm
         npm install -D conventional-changelog-angular
     
     - name: Run semantic-release
