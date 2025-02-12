@@ -83,9 +83,10 @@ jobs:
     - name: Publish to crates.io
       env:
         CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-      run: cargo publish --token $CRATES_IO_TOKEN
-
-    - name: Create a GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: cargo release --token $GITHUB_TOKEN
+      run: 
+        if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+          VERSION=${GITHUB_REF_NAME}
+        else
+          VERSION=${GITHUB_SHA::8}
+        fi
+        cargo publish --token $CRATES_IO_TOKEN --config package.version="${VERSION}"
