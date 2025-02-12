@@ -12,14 +12,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-    - name: Install tarpaulin
-      run: cargo install cargo-tarpaulin
-
+      
     - name: Cache cargo registry
       uses: actions/cache@v4
       with:
@@ -44,6 +37,21 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-cargo-build-
 
+    # Now let's actually do our pipeline.
+    # Grab all the rust dependencies.
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - name: Cargo Install Packages
+      run: 
+        cargo install cargo-edit
+        cargo install cargo-tarpaulin
+    
+    - name: Set Cargo Version
+      if: contains(github.ref_type, 'tag')
+      run: cargo set-version ${GITHUB_REF_NAME}
+
     - name: Run Code Coverage
       env:
         RUSTFLAGS: "--deny warnings"
@@ -60,15 +68,9 @@ jobs:
     - name: Build in release mode
       env:
         RUSTFLAGS: "--deny warnings"
-      run:
-        if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-          VERSION=${GITHUB_REF_NAME}
-        else
-          VERSION=${GITHUB_SHA::8}
-        fi
-        cargo build --release --config package.version="${VERSION}"
+      run: cargo build --release 
   publish:
-    if: contains(github.ref, 'main') # Only publish when on main branch.
+    if: contains(github.ref_type, 'tag')
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -79,14 +81,15 @@ jobs:
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
+    - name: Cargo Install Packages
+      run: 
+        cargo install cargo-edit
+    
+    - name: Set Cargo Version
+      if: contains(github.ref_type, 'tag')
+      run: cargo set-version ${GITHUB_REF_NAME}
 
     - name: Publish to crates.io
       env:
         CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-      run: 
-        if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-          VERSION=${GITHUB_REF_NAME}
-        else
-          VERSION=${GITHUB_SHA::8}
-        fi
-        cargo publish --token $CRATES_IO_TOKEN --config package.version="${VERSION}"
+      run: cargo publish --token $CRATES_IO_TOKEN 
