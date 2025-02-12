@@ -3,9 +3,10 @@ name: Rust Release
 permissions: write-all
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_run:
+    workflows: ["Semantic Versioning"]
+    types:
+      - completed
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review, review_requested]
     branches:
@@ -53,8 +54,14 @@ jobs:
       run: cargo install cargo-edit cargo-tarpaulin
     
     - name: Set Cargo Version
-      if: contains(github.ref_type, 'tag')
-      run: cargo set-version ${GITHUB_REF_NAME}
+      run: |
+        TAG_NAME=$(git tag --sort=-creatordate | head -n 1)
+        if [ -n "$TAG_NAME" ]; then
+          echo "Found tag: `$TAG_NAME` - setting version..."
+          cargo set-version ${GITHUB_REF_NAME}
+        else
+          echo "No tags found, no version was set."
+        fi
 
     - name: Run Code Coverage
       env:
@@ -74,7 +81,7 @@ jobs:
         RUSTFLAGS: "--deny warnings"
       run: cargo build --release 
   publish:
-    if: contains(github.ref_type, 'tag')
+    if: contains(github.ref_type, 'tag') || contains(github.event_name, 'workflow_run')
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -90,8 +97,14 @@ jobs:
         cargo install cargo-edit
     
     - name: Set Cargo Version
-      if: contains(github.ref_type, 'tag')
-      run: cargo set-version ${GITHUB_REF_NAME}
+      run: |
+        TAG_NAME=$(git tag --sort=-creatordate | head -n 1)
+        if [ -n "$TAG_NAME" ]; then
+          echo "Found tag: `$TAG_NAME` - setting version..."
+          cargo set-version ${GITHUB_REF_NAME}
+        else
+          echo "No tags found, no version was set."
+        fi
 
     - name: Publish to crates.io
       env:
