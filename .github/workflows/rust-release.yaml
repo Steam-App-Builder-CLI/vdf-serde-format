@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       
     - name: Cache cargo registry
       uses: actions/cache@v4
@@ -55,9 +55,12 @@ jobs:
     
     - name: Set Cargo Version
       run: |
+        git status
+        git fetch --tags
+        echo "Version '$(git tag --sort=-creatordate | head -n 1)'"
         TAG_NAME=$(git tag --sort=-creatordate | head -n 1)
         if [ -n "$TAG_NAME" ]; then
-          echo "Found tag: `$TAG_NAME` - setting version..."
+          echo "Found tag: '$TAG_NAME' - setting version..."
           cargo set-version ${GITHUB_REF_NAME}
         else
           echo "No tags found, no version was set."
@@ -98,6 +101,9 @@ jobs:
     
     - name: Set Cargo Version
       run: |
+        git status
+        git fetch --tags
+        echo "Version '$(git tag --sort=-creatordate | head -n 1)'"
         TAG_NAME=$(git tag --sort=-creatordate | head -n 1)
         if [ -n "$TAG_NAME" ]; then
           echo "Found tag: `$TAG_NAME` - setting version..."
