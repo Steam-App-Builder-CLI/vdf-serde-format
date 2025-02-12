@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.4...v1.0.5) (2025-02-12)
+
+
+### Bug Fixes
+
+* **ci:** allow dirty, since the cargo toml changes before publishing. ([69517a1](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/69517a1af186ba4877046822abba193b8fdc8698))
+
 ## [1.0.4](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.3...v1.0.4) (2025-02-12)
 
 
