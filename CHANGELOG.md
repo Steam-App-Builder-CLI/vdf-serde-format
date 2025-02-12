@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.2...v1.0.3) (2025-02-12)
+
+
+### Bug Fixes
+
+* **ci:** tag without characters. ([2f00b9f](https://github.com/Steam-App-Builder-CLI/vdf_serde/commit/2f00b9f0441e5814bf9a695c2c6bb10ee1cf572e))
+
 ## [1.0.2](https://github.com/Steam-App-Builder-CLI/vdf_serde/compare/v1.0.1...v1.0.2) (2025-02-12)
 
 
